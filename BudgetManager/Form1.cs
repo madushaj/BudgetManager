@@ -16,5 +16,26 @@ namespace BudgetManager
         {
             InitializeComponent();
         }
+
+        private void btnTranactinMgtClick(object sender, EventArgs e)
+        {
+            this.Hide();
+            TransactionMgt transactionMgtform = new TransactionMgt();
+            transactionMgtform.ShowDialog();
+        }
+
+        private void budgetMgtButtonClick(object sender, EventArgs e)
+        {
+            this.Hide();
+            BudgetMgt budgetMgt = new BudgetMgt();
+            budgetMgt.ShowDialog();
+        }
+
+        private void categoryMgtButtonClick(object sender, EventArgs e)
+        {
+            this.Hide();
+            CategoryMgt categoryMgt = new CategoryMgt();
+            categoryMgt.ShowDialog();
+        }
     }
 }
