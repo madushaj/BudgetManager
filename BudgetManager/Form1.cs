@@ -16,5 +16,18 @@ namespace BudgetManager
         {
             InitializeComponent();
         }
+
+        private void btn1click(object sender, EventArgs e)
+        {
+            User user = new User();
+            BudgetManagerModelContainer budgetManagerModelContainer = new BudgetManagerModelContainer();
+            user.Name = "sew";
+            user.UserName = "sew";
+            user.Password = "sew";
+            budgetManagerModelContainer.Users.Add(user);
+            Console.Write("save :" +user.Name);
+            budgetManagerModelContainer.SaveChanges();
+            
+        }
     }
 }

@@ -1,11 +1,13 @@
-
+﻿
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/11/2019 12:28:24
--- Generated from EDMX file: D:\Msc\Advance Software Design\cw1\BudgetManager\BudgetManager\BudgetManagerModel.edmx
+-- Date Created: 11/11/2019 12:11:46
+-- Generated from EDMX file: C:\Users\mjaylk\source\repos\BudgetManager\BudgetManager\BudgetManagerModel.edmx
 -- --------------------------------------------------
+
 create database BudgetManager;
+
 SET QUOTED_IDENTIFIER OFF;
 GO
 USE [BudgetManager];
@@ -17,44 +19,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_UserTransaction]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_UserTransaction];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserBudget]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Budgets] DROP CONSTRAINT [FK_UserBudget];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Categories] DROP CONSTRAINT [FK_UserCategory];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TransactionCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_TransactionCategory];
-GO
-IF OBJECT_ID(N'[dbo].[FK_BudgetItemBudget]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BudgetItems] DROP CONSTRAINT [FK_BudgetItemBudget];
-GO
-IF OBJECT_ID(N'[dbo].[FK_BudgetItemCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BudgetItems] DROP CONSTRAINT [FK_BudgetItemCategory];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Users];
-GO
-IF OBJECT_ID(N'[dbo].[Transactions]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Transactions];
-GO
-IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Categories];
-GO
-IF OBJECT_ID(N'[dbo].[BudgetItems]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[BudgetItems];
-GO
-IF OBJECT_ID(N'[dbo].[Budgets]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Budgets];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
