@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+
             this.btnManageTransaction = new System.Windows.Forms.Button();
             this.btnBudgetMng = new System.Windows.Forms.Button();
             this.btnCategoryMgt = new System.Windows.Forms.Button();
@@ -66,6 +67,15 @@
             this.btnCategoryMgt.UseVisualStyleBackColor = true;
             this.btnCategoryMgt.Click += new System.EventHandler(this.categoryMgtButtonClick);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(534, 154);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(192, 45);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -75,6 +85,7 @@
             this.Controls.Add(this.btnBudgetMng);
             this.Controls.Add(this.btnManageTransaction);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -86,6 +97,7 @@
         private System.Windows.Forms.Button btnManageTransaction;
         private System.Windows.Forms.Button btnBudgetMng;
         private System.Windows.Forms.Button btnCategoryMgt;
+
     }
 }
 
