@@ -44,16 +44,7 @@ namespace BudgetManager
                         select Transaction;
 
             transactionsList = query.ToList();
-            dataGridViewTransaction.DataSource = transactionsList.Select(o => new
-            { Title = o.Title, Value = o.Value, Category = o.Category.Name, TransacitonType = o.TrType,  RecursionInterval = o.RecursionType.ToString(), Description = o.Desc, TransactionId = o.Id }).ToList();
-            this.dataGridViewTransaction.Columns["TransactionId"].Visible = false;
-
-            int tempColWidth = dataGridViewTransaction.Width / dataGridViewTransaction.Columns.Count;
-            for (int i = 0; i <= dataGridViewTransaction.Columns.Count - 1; i++)
-            {
-                dataGridViewTransaction.Columns[i].Width = tempColWidth;
-            }
-            this.dataGridViewTransaction.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            generateDataGridView(transactionsList);
 
             var query2 = from Category in budgetManager.Categories
                         where Category.UserId == 1 // to do : user should be passed
@@ -76,6 +67,20 @@ namespace BudgetManager
             datePickerTransaction.Value = DateTime.Today.AddDays(0);
             datePickerStart.Value = DateTime.Today.AddDays(0);
             datePickerEnd.Value = DateTime.Today.AddDays(0);
+        }
+
+        private void generateDataGridView(List<Transaction> transactionsList)
+        {
+            dataGridViewTransaction.DataSource = transactionsList.Select(o => new
+            { TransactionId = o.Id, Title = o.Title, Value = o.Value, Category = o.Category.Name, TransacitonType = o.TrType, RecursionInterval = o.RecursionType.ToString(), Date = o.Date, Description = o.Desc }).ToList();
+            this.dataGridViewTransaction.Columns["TransactionId"].Visible = false;
+
+            int tempColWidth = dataGridViewTransaction.Width / dataGridViewTransaction.Columns.Count;
+            for (int i = 0; i <= dataGridViewTransaction.Columns.Count - 1; i++)
+            {
+                dataGridViewTransaction.Columns[i].Width = tempColWidth;
+            }
+            this.dataGridViewTransaction.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void btnHomeClick(object sender, EventArgs e)
@@ -141,22 +146,6 @@ namespace BudgetManager
                 transaction.TrType = TransactionType.Expense;
             }
 
-            /*switch (comboRecursionType.SelectedIndex){
-                case (0):
-                    transaction.RecursionType = RecursionInterval.None;
-                    break;
-                case (1):
-                    transaction.RecursionType = RecursionInterval.Weekly;
-                    break;
-                case (2):
-                    transaction.RecursionType = RecursionInterval.Monthly;
-                    break;
-                case (3):
-                    transaction.RecursionType = RecursionInterval.Annually;
-                    break;
-                default:
-                    break;
-            }*/
             transaction.RecursionType = (RecursionInterval)comboRecursionType.SelectedItem;
             transaction.Category = (Category)comboCategory.SelectedItem;
             transaction.Date = datePickerTransaction.Value.Date;
@@ -181,6 +170,25 @@ namespace BudgetManager
 
         private void searchTransaction(object sender, EventArgs e)
         {
+            DateTime startDate = datePickerStart.Value.Date;
+            DateTime endDate = datePickerEnd.Value.Date;
+
+            if (startDate > endDate)
+            {
+                MessageBox.Show("Start date cannot be later than end date", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                loadData();
+                return;
+            }
+            else
+            {
+                List<Transaction> transactionsListTmp = new List<Transaction>();
+                foreach (var transaction in transactionsList) {
+                    if (startDate <= transaction.Date && transaction.Date <= endDate) {
+                        transactionsListTmp.Add(transaction);
+                    }
+                }
+                generateDataGridView(transactionsListTmp);
+            }
 
         }
 
@@ -207,12 +215,29 @@ namespace BudgetManager
 
         private void deleteTransaction(object sender, EventArgs e)
         {
+            int tmpSelectedIndex = getselectedTransactionId();
+            if (tmpSelectedIndex > 0)
+            {
+                var query = from Transaction in budgetManager.Transactions
+                            where Transaction.Id == tmpSelectedIndex
+                            select Transaction;
 
+                Transaction transaction = query.First();
+                budgetManager.Transactions.Remove(transaction);
+                budgetManager.SaveChanges();
+                setselectedTransactionId(-1);
+                MessageBox.Show("Transaction deleted successfully", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                loadData();
+            }
+            else
+            {
+                MessageBox.Show("Select a transaction to delete", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void selectTransaction(object sender, DataGridViewCellEventArgs e)
         {
-            int transactionId = Convert.ToInt32(dataGridViewTransaction.SelectedRows[0].Cells[6].Value.ToString());
+            int transactionId = Convert.ToInt32(dataGridViewTransaction.SelectedRows[0].Cells[0].Value.ToString());
             Transaction transaction = transactionsList.Find(r => r.Id == transactionId);
             //MessageBox.Show(transaction.Title, "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
             txtTitle.Text = transaction.Title;
