@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BudgetManagerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BudgetManagerModelStoreContainer">
+    <EntitySet Name="Users" EntityType="BudgetManagerModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transactions" EntityType="BudgetManagerModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="BudgetManagerModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BudgetItems" EntityType="BudgetManagerModel.Store.BudgetItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Budgets" EntityType="BudgetManagerModel.Store.Budgets" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserTransaction" Association="BudgetManagerModel.Store.UserTransaction">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="UserBudget" Association="BudgetManagerModel.Store.UserBudget">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Budget" EntitySet="Budgets" />
+    </AssociationSet>
+    <AssociationSet Name="UserCategory" Association="BudgetManagerModel.Store.UserCategory">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionCategory" Association="BudgetManagerModel.Store.TransactionCategory">
+      <End Role="Transaction" EntitySet="Transactions" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="BudgetItemBudget" Association="BudgetManagerModel.Store.BudgetItemBudget">
+      <End Role="BudgetItem" EntitySet="BudgetItems" />
+      <End Role="Budget" EntitySet="Budgets" />
+    </AssociationSet>
+    <AssociationSet Name="BudgetItemCategory" Association="BudgetManagerModel.Store.BudgetItemCategory">
+      <End Role="BudgetItem" EntitySet="BudgetItems" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Desc" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="TrType" Type="int" Nullable="true" />
+    <Property Name="RecursionType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Desc" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BudgetItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Allocation" Type="float" Nullable="false" />
+    <Property Name="BudgetId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="ItemType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Budgets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Month" Type="smallint" Nullable="false" />
+    <Property Name="Year" Type="smallint" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserTransaction">
+    <End Role="User" Type="BudgetManagerModel.Store.Users" Multiplicity="1" />
+    <End Role="Transaction" Type="BudgetManagerModel.Store.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserBudget">
+    <End Role="User" Type="BudgetManagerModel.Store.Users" Multiplicity="1" />
+    <End Role="Budget" Type="BudgetManagerModel.Store.Budgets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserCategory">
+    <End Role="User" Type="BudgetManagerModel.Store.Users" Multiplicity="1" />
+    <End Role="Category" Type="BudgetManagerModel.Store.Categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionCategory">
+    <End Role="Transaction" Type="BudgetManagerModel.Store.Transactions" Multiplicity="*" />
+    <End Role="Category" Type="BudgetManagerModel.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BudgetItemBudget">
+    <End Role="BudgetItem" Type="BudgetManagerModel.Store.BudgetItems" Multiplicity="*" />
+    <End Role="Budget" Type="BudgetManagerModel.Store.Budgets" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Budget">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BudgetItem">
+        <PropertyRef Name="BudgetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BudgetItemCategory">
+    <End Role="BudgetItem" Type="BudgetManagerModel.Store.BudgetItems" Multiplicity="*" />
+    <End Role="Category" Type="BudgetManagerModel.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BudgetItem">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="BudgetManagerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="BudgetManagerModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="BudgetManagerModel.User" />
+          <EntitySet Name="Transactions" EntityType="BudgetManagerModel.Transaction" />
+          <EntitySet Name="Categories" EntityType="BudgetManagerModel.Category" />
+          <EntitySet Name="BudgetItems" EntityType="BudgetManagerModel.BudgetItem" />
+          <EntitySet Name="Budgets" EntityType="BudgetManagerModel.Budget" />
+          <AssociationSet Name="UserTransaction" Association="BudgetManagerModel.UserTransaction">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="UserBudget" Association="BudgetManagerModel.UserBudget">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Budget" EntitySet="Budgets" />
+          </AssociationSet>
+          <AssociationSet Name="UserCategory" Association="BudgetManagerModel.UserCategory">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="TransactionCategory" Association="BudgetManagerModel.TransactionCategory">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="BudgetItemBudget" Association="BudgetManagerModel.BudgetItemBudget">
+            <End Role="BudgetItem" EntitySet="BudgetItems" />
+            <End Role="Budget" EntitySet="Budgets" />
+          </AssociationSet>
+          <AssociationSet Name="BudgetItemCategory" Association="BudgetManagerModel.BudgetItemCategory">
+            <End Role="BudgetItem" EntitySet="BudgetItems" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="BudgetManagerModel.UserTransaction" FromRole="User" ToRole="Transaction" />
+          <NavigationProperty Name="Budgets" Relationship="BudgetManagerModel.UserBudget" FromRole="User" ToRole="Budget" />
+          <NavigationProperty Name="Categories" Relationship="BudgetManagerModel.UserCategory" FromRole="User" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Desc" Type="String" Nullable="true" />
+          <NavigationProperty Name="User" Relationship="BudgetManagerModel.UserTransaction" FromRole="Transaction" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="BudgetManagerModel.TransactionCategory" FromRole="Transaction" ToRole="Category" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="TrType" Type="BudgetManagerModel.TransactionType" Nullable="true" />
+          <Property Name="RecursionType" Type="BudgetManagerModel.RecursionInterval" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Desc" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="BudgetManagerModel.UserCategory" FromRole="Category" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="BudgetManagerModel.TransactionCategory" FromRole="Category" ToRole="Transaction" />
+          <NavigationProperty Name="BudgetItems" Relationship="BudgetManagerModel.BudgetItemCategory" FromRole="Category" ToRole="BudgetItem" />
+        </EntityType>
+        <EntityType Name="BudgetItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Allocation" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Budget" Relationship="BudgetManagerModel.BudgetItemBudget" FromRole="BudgetItem" ToRole="Budget" />
+          <Property Name="BudgetId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="BudgetManagerModel.BudgetItemCategory" FromRole="BudgetItem" ToRole="Category" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ItemType" Type="BudgetManagerModel.TransactionType" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Budget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Month" Type="Int16" Nullable="false" />
+          <Property Name="Year" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="BudgetManagerModel.UserBudget" FromRole="Budget" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BudgetItems" Relationship="BudgetManagerModel.BudgetItemBudget" FromRole="Budget" ToRole="BudgetItem" />
+        </EntityType>
+        <EnumType Name="TransactionType" >
+          <Member Name="Income" />
+          <Member Name="Expense" />
+        </EnumType>
+        <EnumType Name="RecursionInterval">
+          <Member Name="None" />
+          <Member Name="Monthly" />
+          <Member Name="Weekly" />
+          <Member Name="Annually" />
+        </EnumType>
+        <Association Name="UserTransaction">
+          <End Type="BudgetManagerModel.User" Role="User" Multiplicity="1" />
+          <End Type="BudgetManagerModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserBudget">
+          <End Type="BudgetManagerModel.User" Role="User" Multiplicity="1" />
+          <End Type="BudgetManagerModel.Budget" Role="Budget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Budget">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserCategory">
+          <End Type="BudgetManagerModel.User" Role="User" Multiplicity="1" />
+          <End Type="BudgetManagerModel.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransactionCategory">
+          <End Type="BudgetManagerModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <End Type="BudgetManagerModel.Category" Role="Category" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BudgetItemBudget">
+          <End Type="BudgetManagerModel.BudgetItem" Role="BudgetItem" Multiplicity="*" />
+          <End Type="BudgetManagerModel.Budget" Role="Budget" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Budget">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BudgetItem">
+              <PropertyRef Name="BudgetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BudgetItemCategory">
+          <End Type="BudgetManagerModel.BudgetItem" Role="BudgetItem" Multiplicity="*" />
+          <End Type="BudgetManagerModel.Category" Role="Category" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BudgetItem">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BudgetManagerModelStoreContainer" CdmEntityContainer="BudgetManagerModelContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(BudgetManagerModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="IsTypeOf(BudgetManagerModel.Transaction)">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Desc" ColumnName="Desc" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="TrType" ColumnName="TrType" />
+          <ScalarProperty Name="RecursionType" ColumnName="RecursionType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(BudgetManagerModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Desc" ColumnName="Desc" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BudgetItems">
+      <EntityTypeMapping TypeName="IsTypeOf(BudgetManagerModel.BudgetItem)">
+        <MappingFragment StoreEntitySet="BudgetItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Allocation" ColumnName="Allocation" />
+          <ScalarProperty Name="BudgetId" ColumnName="BudgetId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Budgets">
+      <EntityTypeMapping TypeName="IsTypeOf(BudgetManagerModel.Budget)">
+        <MappingFragment StoreEntitySet="Budgets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

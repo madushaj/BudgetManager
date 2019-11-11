@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="245645f0e1884af59ec8236adc0db734" Name="Diagram1" >
+        <EntityTypeShape EntityType="BudgetManagerModel.User" Width="1.5" PointX="5" PointY="0.5" />
+        <EntityTypeShape EntityType="BudgetManagerModel.Transaction" Width="1.5" PointX="9.375" PointY="1.375" />
+        <EntityTypeShape EntityType="BudgetManagerModel.Category" Width="1.5" PointX="5.5" PointY="3.75" />
+        <EntityTypeShape EntityType="BudgetManagerModel.BudgetItem" Width="1.5" PointX="2" PointY="3.75" />
+        <EntityTypeShape EntityType="BudgetManagerModel.Budget" Width="1.5" PointX="0.875" PointY="0.75" />
+        <AssociationConnector Association="BudgetManagerModel.UserTransaction" />
+        <AssociationConnector Association="BudgetManagerModel.UserBudget" />
+        <AssociationConnector Association="BudgetManagerModel.UserCategory" />
+        <AssociationConnector Association="BudgetManagerModel.TransactionCategory" />
+        <AssociationConnector Association="BudgetManagerModel.BudgetItemBudget" />
+        <AssociationConnector Association="BudgetManagerModel.BudgetItemCategory" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
