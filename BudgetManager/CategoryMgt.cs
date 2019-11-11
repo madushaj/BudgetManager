@@ -90,5 +90,10 @@ namespace BudgetManager
             var result = MessageBox.Show("Are you sure that you want to delete the selected category?", "Deleting Selected category", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return result == DialogResult.Yes ? true : false;
         }
+
+        private void closeForm(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

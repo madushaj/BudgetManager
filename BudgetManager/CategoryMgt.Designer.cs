@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoryMgt));
             this.btnHome = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddCategory = new System.Windows.Forms.Button();
-            this.categoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnDeleteCategory = new System.Windows.Forms.Button();
             this.gridViewCategory = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCategory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,10 +68,6 @@
             this.btnAddCategory.Text = "Add";
             this.btnAddCategory.UseVisualStyleBackColor = true;
             this.btnAddCategory.Click += new System.EventHandler(this.AddCategory);
-            // 
-            // categoriesBindingSource
-            // 
-            this.categoriesBindingSource.DataMember = "Categories";
             // 
             // btnDeleteCategory
             // 
@@ -114,8 +107,8 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CategoryMgt";
             this.Text = "Category Management";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.closeForm);
             this.Load += new System.EventHandler(this.CategoryMgt_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCategory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -127,7 +120,6 @@
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAddCategory;
-        private System.Windows.Forms.BindingSource categoriesBindingSource;
         private System.Windows.Forms.Button btnDeleteCategory;
         private System.Windows.Forms.DataGridView gridViewCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
