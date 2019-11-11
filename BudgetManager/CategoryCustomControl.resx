@@ -117,17 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnHome.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAN5JREFUWEft
-        lFEKwyAQRL1ES3vE9rjpR4/TOpABWXatGTX98cGQEJ2ZjYGkRSfXXX/hkrVlvbPueHAmeOtX1mcX7k87
-        ibIc1/J++hA8dhTi6G/Os2mfwysn04eolZNpQ7SUk+FDHCknw4ZQykn3ED3lRB5iRDk5PERpgHrKCTKZ
-        Vx3ClkOjKDPDIZ5Z2MBfK+TBtUgeXGM2ulweWfift4RF8uAastHxk5Ywi+IJUcIUT4gSpnhClDDFE6KE
-        KZ4QJUzxhChhiidECVM8ITTUZPH2WDXjma0s3h6rxcKQ0hfwJsdtGKbU2AAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="categoriesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>92, 17</value>
-  </metadata>
 </root>

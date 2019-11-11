@@ -338,3 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/BudgetManager/BudgetManagerDataSet.Designer.cs
+/BudgetManager/BudgetManagerDataSet.xsc
+/BudgetManager/BudgetManagerDataSet.xsd
+/BudgetManager/BudgetManagerDataSet.xss
