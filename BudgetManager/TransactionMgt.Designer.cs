@@ -327,7 +327,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoScrollMargin = new System.Drawing.Size(20, 20);
-            this.ClientSize = new System.Drawing.Size(1430, 1104);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1450, 1132);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.comboCategory);
             this.Controls.Add(this.label11);
@@ -358,7 +359,8 @@
             this.Controls.Add(this.btnHome);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "TransactionMgt";
-            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 20);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transaction Management";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.closeForm);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransaction)).EndInit();

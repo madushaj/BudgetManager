@@ -31,6 +31,7 @@ namespace BudgetManager
         public TransactionMgt()
         {
             InitializeComponent();
+            
             loadData();
         }
 
