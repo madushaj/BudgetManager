@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="CategoryMgt.Designer.cs">
       <DependentUpon>CategoryMgt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget.cs">
       <DependentUpon>BudgetManagerModel.tt</DependentUpon>
     </Compile>
