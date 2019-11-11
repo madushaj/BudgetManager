@@ -67,14 +67,6 @@
             this.btnCategoryMgt.UseVisualStyleBackColor = true;
             this.btnCategoryMgt.Click += new System.EventHandler(this.categoryMgtButtonClick);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(534, 154);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(192, 45);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
