@@ -55,7 +55,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.comoboCategory = new System.Windows.Forms.ComboBox();
+            this.comboCategory = new System.Windows.Forms.ComboBox();
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransaction)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,11 +189,6 @@
             // comboRecursionType
             // 
             this.comboRecursionType.FormattingEnabled = true;
-            this.comboRecursionType.Items.AddRange(new object[] {
-            "None",
-            "Weekly",
-            "Monthly",
-            "Annually"});
             this.comboRecursionType.Location = new System.Drawing.Point(909, 219);
             this.comboRecursionType.Name = "comboRecursionType";
             this.comboRecursionType.Size = new System.Drawing.Size(493, 32);
@@ -200,13 +196,21 @@
             // 
             // dataGridViewTransaction
             // 
+            this.dataGridViewTransaction.AllowUserToAddRows = false;
+            this.dataGridViewTransaction.AllowUserToDeleteRows = false;
+            this.dataGridViewTransaction.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridViewTransaction.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridViewTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewTransaction.Location = new System.Drawing.Point(42, 506);
+            this.dataGridViewTransaction.MultiSelect = false;
             this.dataGridViewTransaction.Name = "dataGridViewTransaction";
+            this.dataGridViewTransaction.ReadOnly = true;
             this.dataGridViewTransaction.RowHeadersWidth = 72;
             this.dataGridViewTransaction.RowTemplate.Height = 31;
+            this.dataGridViewTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewTransaction.Size = new System.Drawing.Size(1360, 473);
             this.dataGridViewTransaction.TabIndex = 16;
+            this.dataGridViewTransaction.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectTransaction);
             // 
             // btnDelete
             // 
@@ -282,7 +286,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(852, 1015);
+            this.button1.Location = new System.Drawing.Point(42, 1015);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 47);
             this.button1.TabIndex = 25;
@@ -299,18 +303,23 @@
             this.label11.TabIndex = 26;
             this.label11.Text = "Transaction Type";
             // 
-            // comoboCategory
+            // comboCategory
             // 
-            this.comoboCategory.FormattingEnabled = true;
-            this.comoboCategory.Items.AddRange(new object[] {
-            "None",
-            "Weekly",
-            "Monthly",
-            "Annually"});
-            this.comoboCategory.Location = new System.Drawing.Point(200, 288);
-            this.comoboCategory.Name = "comoboCategory";
-            this.comoboCategory.Size = new System.Drawing.Size(483, 32);
-            this.comoboCategory.TabIndex = 27;
+            this.comboCategory.FormattingEnabled = true;
+            this.comboCategory.Location = new System.Drawing.Point(200, 288);
+            this.comboCategory.Name = "comboCategory";
+            this.comboCategory.Size = new System.Drawing.Size(483, 32);
+            this.comboCategory.TabIndex = 27;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(182, 1015);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(109, 47);
+            this.btnClear.TabIndex = 28;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.clearFields);
             // 
             // TransactionMgt
             // 
@@ -319,7 +328,8 @@
             this.AutoScroll = true;
             this.AutoScrollMargin = new System.Drawing.Size(20, 20);
             this.ClientSize = new System.Drawing.Size(1430, 1104);
-            this.Controls.Add(this.comoboCategory);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.comboCategory);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.datePickerEnd);
@@ -385,6 +395,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comoboCategory;
+        private System.Windows.Forms.ComboBox comboCategory;
+        private System.Windows.Forms.Button btnClear;
     }
 }
