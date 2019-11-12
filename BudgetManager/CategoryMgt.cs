@@ -61,7 +61,7 @@ namespace BudgetManager
 
             categoriesList = categoriesList = query.ToList();
             gridViewCategory.DataSource = categoriesList.Select(o => new
-            { Name = o.Name, Description = o.Desc, Id = o.Id}).ToList();
+            { Id = o.Id, Name = o.Name, Description = o.Desc}).ToList();
             this.gridViewCategory.Columns["Id"].Visible = false;
             this.gridViewCategory.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
@@ -71,10 +71,10 @@ namespace BudgetManager
             if (GetUSerConfirmation())
             {
                 BudgetManagerModelContainer budgetManager = new BudgetManagerModelContainer();
-                Category deleteCategory = (Category)gridViewCategory.SelectedRows[0].DataBoundItem;
+                Int32 categoryId = Convert.ToInt32(gridViewCategory.SelectedRows[0].Cells[0].Value.ToString());
 
                 var query = from Category in budgetManager.Categories
-                            where Category.Id == deleteCategory.Id 
+                            where Category.Id == categoryId 
                             select Category;
                 Category item = query.First();
                 budgetManager.Categories.Remove(item);

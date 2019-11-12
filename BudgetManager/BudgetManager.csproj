@@ -67,6 +67,12 @@
     <Compile Include="CategoryMgt.Designer.cs">
       <DependentUpon>CategoryMgt.cs</DependentUpon>
     </Compile>
+    <Compile Include="CategoryCustomControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CategoryCustomControl.Designer.cs">
+      <DependentUpon>CategoryCustomControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget.cs">
       <DependentUpon>BudgetManagerModel.tt</DependentUpon>
     </Compile>
@@ -90,6 +96,12 @@
     </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>BudgetManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseVisualControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ExpenseVisualControl.Designer.cs">
+      <DependentUpon>ExpenseVisualControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -123,8 +135,14 @@
     <Compile Include="User.cs">
       <DependentUpon>BudgetManagerModel.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ExpenseVisualControl.resx">
+      <DependentUpon>ExpenseVisualControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CategoryCustomControl.resx">
+      <DependentUpon>CategoryCustomControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
