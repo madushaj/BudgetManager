@@ -150,6 +150,8 @@ namespace BudgetManager
             transaction.RecursionType = (RecursionInterval)comboRecursionType.SelectedItem;
             transaction.CatTran.Category = (Category)comboCategory.SelectedItem;
             transaction.Date = datePickerTransaction.Value.Date;
+            transaction.CatTran.Month = (Int16)(datePickerTransaction.Value.Month);
+            transaction.CatTran.Year = (Int16)(datePickerTransaction.Value.Year);
             transaction.UserId = this.userId;
 
             return true;
