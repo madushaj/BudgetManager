@@ -93,6 +93,11 @@ namespace BudgetManager
             for (int i = 0; i <= dataGridViewTransaction.Columns.Count - 1; i++)
             {
                 dataGridViewTransaction.Columns[i].Width = tempColWidth;
+
+                /*if ((i == 4) && dataGridViewTransaction.Columns[i].ValueType.ToString()) 
+                {
+
+                }*/
             }
             this.dataGridViewTransaction.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
@@ -123,7 +128,6 @@ namespace BudgetManager
         private bool createTransactionFromValues(ref Transaction transaction, transactionOperations op)
         {
             Double tempVal = 0;
-            CatTrans categoryTransaction;
 
             if (!ValidateField(txtTitle.Text, "Title"))
             {
@@ -164,19 +168,23 @@ namespace BudgetManager
             transaction.Date = datePickerTransaction.Value.Date;
             transaction.UserId = this.userId;
 
-            if (op == transactionOperations.Save) {
-                categoryTransaction = new CatTrans();
-                categoryTransaction.CategoryId = ((Category)comboCategory.SelectedItem).Id;
-                categoryTransaction.Month = (Int16)(datePickerTransaction.Value.Month);
-                categoryTransaction.Year = (Int16)(datePickerTransaction.Value.Year);
-                transaction.CatTran = categoryTransaction;
-            }
-            else if (op == transactionOperations.Modify)
+            var query = from CatTran in budgetManager.CatTrans
+                        where CatTran.Month == (Int16)(datePickerTransaction.Value.Month) &&
+                        CatTran.Year == (Int16)(datePickerTransaction.Value.Year) &&
+                        CatTran.CategoryId == ((Category)comboCategory.SelectedItem).Id
+                        select CatTran;
+
+            if (query.Any())
             {
-                categoryTransaction = transaction.CatTran;
-                categoryTransaction.CategoryId = ((Category)comboCategory.SelectedItem).Id;
-                categoryTransaction.Month = (Int16)(datePickerTransaction.Value.Month);
-                categoryTransaction.Year = (Int16)(datePickerTransaction.Value.Year);
+                transaction.CatTran = query.First();
+            }
+            else
+            {
+                CatTrans catTran = new CatTrans();
+                catTran.CategoryId = ((Category)comboCategory.SelectedItem).Id;
+                catTran.Month = (Int16)(datePickerTransaction.Value.Month);
+                catTran.Year = (Int16)(datePickerTransaction.Value.Year);
+                transaction.CatTran = catTran;
             }
 
             return true;
