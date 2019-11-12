@@ -71,7 +71,9 @@ namespace BudgetManager
                         where Category.UserId == 1 // to do : user should be passed
                         select Category;
 
-            categoriesList = categoriesList = query.ToList();
+            if (query.Any()) {
+                categoriesList = categoriesList = query.ToList();
+            }
             loadExpenseBars();
         }
 
