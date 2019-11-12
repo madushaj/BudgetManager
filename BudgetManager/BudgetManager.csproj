@@ -97,6 +97,9 @@
     <Compile Include="Category.cs">
       <DependentUpon>BudgetManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CatTrans.cs">
+      <DependentUpon>BudgetManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CreateUser.cs">
       <SubType>Form</SubType>
     </Compile>
