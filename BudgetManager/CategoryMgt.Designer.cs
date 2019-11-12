@@ -40,7 +40,7 @@
             // btnHome
             // 
             this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
-            this.btnHome.Location = new System.Drawing.Point(647, 11);
+            this.btnHome.Location = new System.Drawing.Point(663, 29);
             this.btnHome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(52, 44);
@@ -51,10 +51,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(261, 9);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(214, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(201, 25);
+            this.label1.Size = new System.Drawing.Size(331, 39);
             this.label1.TabIndex = 2;
             this.label1.Text = "Manage Categories";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -63,7 +63,7 @@
             // 
             this.btnAddCategory.Location = new System.Drawing.Point(40, 103);
             this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(75, 43);
+            this.btnAddCategory.Size = new System.Drawing.Size(119, 43);
             this.btnAddCategory.TabIndex = 8;
             this.btnAddCategory.Text = "Add";
             this.btnAddCategory.UseVisualStyleBackColor = true;
@@ -71,9 +71,9 @@
             // 
             // btnDeleteCategory
             // 
-            this.btnDeleteCategory.Location = new System.Drawing.Point(155, 103);
+            this.btnDeleteCategory.Location = new System.Drawing.Point(199, 103);
             this.btnDeleteCategory.Name = "btnDeleteCategory";
-            this.btnDeleteCategory.Size = new System.Drawing.Size(75, 43);
+            this.btnDeleteCategory.Size = new System.Drawing.Size(113, 43);
             this.btnDeleteCategory.TabIndex = 10;
             this.btnDeleteCategory.Text = "Delete";
             this.btnDeleteCategory.UseVisualStyleBackColor = true;
@@ -84,21 +84,21 @@
             this.gridViewCategory.AllowUserToAddRows = false;
             this.gridViewCategory.AllowUserToDeleteRows = false;
             this.gridViewCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridViewCategory.Location = new System.Drawing.Point(323, 103);
+            this.gridViewCategory.Location = new System.Drawing.Point(380, 103);
             this.gridViewCategory.MultiSelect = false;
             this.gridViewCategory.Name = "gridViewCategory";
             this.gridViewCategory.ReadOnly = true;
             this.gridViewCategory.RowHeadersWidth = 51;
             this.gridViewCategory.RowTemplate.Height = 24;
             this.gridViewCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridViewCategory.Size = new System.Drawing.Size(419, 356);
+            this.gridViewCategory.Size = new System.Drawing.Size(335, 349);
             this.gridViewCategory.TabIndex = 11;
             // 
             // CategoryMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 520);
+            this.ClientSize = new System.Drawing.Size(751, 490);
             this.Controls.Add(this.gridViewCategory);
             this.Controls.Add(this.btnDeleteCategory);
             this.Controls.Add(this.btnAddCategory);
@@ -106,6 +106,7 @@
             this.Controls.Add(this.btnHome);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CategoryMgt";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Category Management";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.closeForm);
             this.Load += new System.EventHandler(this.CategoryMgt_Load);
