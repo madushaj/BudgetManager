@@ -117,6 +117,7 @@ namespace BudgetManager
         private bool createTransactionFromValues(ref Transaction transaction)
         {
             Double tempVal = 0;
+            CatTrans categoryTransaction;
 
             if (!ValidateField(txtTitle.Text, "Title"))
             {
@@ -140,7 +141,7 @@ namespace BudgetManager
                 return false;
             }
 
-            
+            categoryTransaction = new CatTrans();
             transaction.Title = txtTitle.Text;
             
             transaction.Desc = txtDescription.Text;
@@ -155,11 +156,13 @@ namespace BudgetManager
             }
 
             transaction.RecursionType = (RecursionInterval)comboRecursionType.SelectedItem;
-            transaction.CatTran.Category = (Category)comboCategory.SelectedItem;
             transaction.Date = datePickerTransaction.Value.Date;
-            transaction.CatTran.Month = (Int16)(datePickerTransaction.Value.Month);
-            transaction.CatTran.Year = (Int16)(datePickerTransaction.Value.Year);
             transaction.UserId = this.userId;
+
+            categoryTransaction.CategoryId = ((Category)comboCategory.SelectedItem).Id;
+            categoryTransaction.Month = (Int16)(datePickerTransaction.Value.Month);
+            categoryTransaction.Year = (Int16)(datePickerTransaction.Value.Year);
+            transaction.CatTran = categoryTransaction;
 
             return true;
         }
