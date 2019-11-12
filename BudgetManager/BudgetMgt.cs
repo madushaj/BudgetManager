@@ -102,8 +102,18 @@ namespace BudgetManager
             var query = from Budget in db.Budgets
                         where Budget.Month == month && Budget.Year == year && Budget.UserId == 1
                         select Budget;
-            List<BudgetItem> budgets = query.First().BudgetItems.ToList();
-            return budgets;
+
+            List<BudgetItem> budgets = new List<BudgetItem>();
+            if(query.Any())
+            {
+                budgets = query.First().BudgetItems.ToList();
+                return budgets;
+            }
+            else
+            {
+                return budgets;
+            }
+            
         }
 
         private void getBudgetforMonth(int year, int month)
@@ -162,6 +172,7 @@ namespace BudgetManager
             txtMonth.Visible = false;
             txtYear.Text = "";
             txtAmount.Text = "";
+            cmbMonth.Visible = true;
             cmbMonth.SelectedIndex = 0;
             cmbCategory.SelectedIndex = 1;
             cmbType.SelectedIndex = 0;
@@ -278,6 +289,7 @@ namespace BudgetManager
             Console.WriteLine("month :" + month);
 
             setDataGridValue(year, month);
+            cleanFields();
         }
     }
 }
