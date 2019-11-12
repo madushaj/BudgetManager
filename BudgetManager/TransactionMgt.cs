@@ -80,7 +80,7 @@ namespace BudgetManager
         private void generateDataGridView(List<Transaction> transactionsList)
         {
             dataGridViewTransaction.DataSource = transactionsList.Select(o => new
-            { TransactionId = o.Id, Title = o.Title, Value = o.Value, Category = o.Category.Name, TransacitonType = o.TrType, RecursionInterval = o.RecursionType.ToString(), Date = o.Date, Description = o.Desc }).ToList();
+            { TransactionId = o.Id, Title = o.Title, Value = o.Value, Category = o.CatTran.Category.Name, TransacitonType = o.TrType, RecursionInterval = o.RecursionType.ToString(), Date = o.Date, Description = o.Desc }).ToList();
             this.dataGridViewTransaction.Columns["TransactionId"].Visible = false;
 
             int tempColWidth = dataGridViewTransaction.Width / dataGridViewTransaction.Columns.Count;
@@ -117,6 +117,7 @@ namespace BudgetManager
         private bool createTransactionFromValues(ref Transaction transaction)
         {
             Double tempVal = 0;
+            CatTrans categoryTransaction;
 
             if (!ValidateField(txtTitle.Text, "Title"))
             {
@@ -140,7 +141,7 @@ namespace BudgetManager
                 return false;
             }
 
-            
+            categoryTransaction = new CatTrans();
             transaction.Title = txtTitle.Text;
             
             transaction.Desc = txtDescription.Text;
@@ -155,9 +156,13 @@ namespace BudgetManager
             }
 
             transaction.RecursionType = (RecursionInterval)comboRecursionType.SelectedItem;
-            transaction.Category = (Category)comboCategory.SelectedItem;
             transaction.Date = datePickerTransaction.Value.Date;
             transaction.UserId = this.userId;
+
+            categoryTransaction.CategoryId = ((Category)comboCategory.SelectedItem).Id;
+            categoryTransaction.Month = (Int16)(datePickerTransaction.Value.Month);
+            categoryTransaction.Year = (Int16)(datePickerTransaction.Value.Year);
+            transaction.CatTran = categoryTransaction;
 
             return true;
         }
@@ -252,7 +257,7 @@ namespace BudgetManager
             txtValue.Text = transaction.Value.ToString();
             txtDescription.Text = transaction.Desc;
             datePickerTransaction.Value = transaction.Date;
-            comboCategory.SelectedItem = transaction.Category;
+            comboCategory.SelectedItem = transaction.CatTran.Category;
             comboRecursionType.SelectedItem = transaction.RecursionType;
             if (transaction.TrType == TransactionType.Income)
             {

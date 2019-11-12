@@ -81,46 +81,46 @@ namespace BudgetManager
             if (query.Any()) {
                 categoriesList = categoriesList = query.ToList();
             }
-            loadExpenseBars();
+            //loadExpenseBars();
         }
 
-        private void loadExpenseBars()
-        {
-            foreach (Category item in categoriesList)
-            {
-                double budgetVal = GetBudgetValue(item);
-                double actualVal = GetActualValue(item);
+        //private void loadExpenseBars()
+        //{
+        //    foreach (Category item in categoriesList)
+        //    {
+        //        double budgetVal = GetBudgetValue(item);
+        //        double actualVal = GetActualValue(item);
 
-                ExpenseVisualControl expensecontrol = new ExpenseVisualControl();
-                expensecontrol.Location = new System.Drawing.Point(12, 150);
-                expensecontrol.Name = item.Name + "ExpenseVisualControl";
-                expensecontrol.categoryLabel.Text = item.Name;
-                expensecontrol.valueLabel.Text = String.Format("Rs. {0:0.00} of {1:0.00}", actualVal, budgetVal);
-                expensecontrol.newProgressBar1.Value = (actualVal < budgetVal) ? Convert.ToInt32((actualVal / budgetVal) * 100) : 100;
-                this.Controls.Add(expensecontrol);
+        //        ExpenseVisualControl expensecontrol = new ExpenseVisualControl();
+        //        expensecontrol.Location = new System.Drawing.Point(12, 150);
+        //        expensecontrol.Name = item.Name + "ExpenseVisualControl";
+        //        expensecontrol.categoryLabel.Text = item.Name;
+        //        expensecontrol.valueLabel.Text = String.Format("Rs. {0:0.00} of {1:0.00}", actualVal, budgetVal);
+        //        expensecontrol.newProgressBar1.Value = (actualVal < budgetVal) ? Convert.ToInt32((actualVal / budgetVal) * 100) : 100;
+        //        this.Controls.Add(expensecontrol);
 
-            }
-        }
+        //    }
+        //}
 
-        private double GetBudgetValue(Category category)
-        {
-            double actualVal = 0.0;
-            foreach (Transaction item in category.Transactions)
-            {
-                actualVal += item.Value;
-            }
-            return actualVal;
-        }
+        //private double GetBudgetValue(Category category)
+        //{
+        //    double actualVal = 0.0;
+        //    foreach (CatTrans item in category.CatTrans)
+        //    {
+        //        //actualVal += item.Value;
+        //    }
+        //    return actualVal;
+        //}
 
-        private double GetActualValue(Category category)
-        {
-            double actualVal = 0.0;
-            foreach (Transaction item in category.Transactions) 
-            {
-                actualVal += item.Value;
-            }
-            return actualVal;
-        }
+        //private double GetActualValue(Category category)
+        //{
+        //    double actualVal = 0.0;
+        //    foreach (CatTrans item in category.CatTrans) 
+        //    {
+        //      //  actualVal += item.Value;
+        //    }
+        //    return actualVal;
+        //}
     }
 
 

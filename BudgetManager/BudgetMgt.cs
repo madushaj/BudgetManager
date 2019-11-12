@@ -152,11 +152,12 @@ namespace BudgetManager
             }
             else
             {
-                //budget = new Budget();
+                budgets = new Budget();
                 budgetItemList.Add(budgetItem);
                 budgets.UserId = 1;
                 budgets.Year = Convert.ToInt16(year);
                 budgets.Month = Convert.ToInt16(month);
+                budgets.BudgetItems = budgetItemList;
                 db.Budgets.Add(budgets);
                 db.SaveChanges();
             }
