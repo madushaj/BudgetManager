@@ -45,10 +45,10 @@
             // valueLabel
             // 
             this.valueLabel.AutoSize = true;
-            this.valueLabel.Font = new System.Drawing.Font("Rockwell", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.valueLabel.Location = new System.Drawing.Point(399, 32);
+            this.valueLabel.Font = new System.Drawing.Font("Rockwell", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.valueLabel.Location = new System.Drawing.Point(399, 22);
             this.valueLabel.Name = "valueLabel";
-            this.valueLabel.Size = new System.Drawing.Size(0, 17);
+            this.valueLabel.Size = new System.Drawing.Size(0, 20);
             this.valueLabel.TabIndex = 2;
             this.valueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -56,7 +56,7 @@
             // 
             this.newProgressBar1.Location = new System.Drawing.Point(37, 52);
             this.newProgressBar1.Name = "newProgressBar1";
-            this.newProgressBar1.Size = new System.Drawing.Size(510, 16);
+            this.newProgressBar1.Size = new System.Drawing.Size(530, 26);
             this.newProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.newProgressBar1.TabIndex = 0;
             // 
@@ -68,7 +68,7 @@
             this.Controls.Add(this.categoryLabel);
             this.Controls.Add(this.newProgressBar1);
             this.Name = "ExpenseVisualControl";
-            this.Size = new System.Drawing.Size(587, 99);
+            this.Size = new System.Drawing.Size(607, 99);
             this.Load += new System.EventHandler(this.loadControl);
             this.ResumeLayout(false);
             this.PerformLayout();
