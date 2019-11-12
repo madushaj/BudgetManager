@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/12/2019 10:59:31
--- Generated from EDMX file: C:\Users\mjaylk\source\repos\BudgetManager\BudgetManager\BudgetManagerModel.edmx
+-- Date Created: 11/12/2019 11:17:14
+-- Generated from EDMX file: C:\Users\ninada\Desktop\IIT Sem4\ASD\CW1\git\budgetManager\BudgetManager\BudgetManagerModel.edmx
 -- --------------------------------------------------
-
+create database BudgetManager2
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [BudgetManager];
+USE [BudgetManager2];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -26,14 +26,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserCategory]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Categories] DROP CONSTRAINT [FK_UserCategory];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TransactionCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_TransactionCategory];
-GO
 IF OBJECT_ID(N'[dbo].[FK_BudgetItemBudget]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BudgetItems] DROP CONSTRAINT [FK_BudgetItemBudget];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BudgetItemCategory]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BudgetItems] DROP CONSTRAINT [FK_BudgetItemCategory];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CatTransTransaction]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_CatTransTransaction];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CatTransCategory]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CatTrans] DROP CONSTRAINT [FK_CatTransCategory];
 GO
 
 -- --------------------------------------------------
@@ -54,6 +57,9 @@ IF OBJECT_ID(N'[dbo].[BudgetItems]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Budgets]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Budgets];
+GO
+IF OBJECT_ID(N'[dbo].[CatTrans]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CatTrans];
 GO
 
 -- --------------------------------------------------
