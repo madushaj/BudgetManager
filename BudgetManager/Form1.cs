@@ -96,7 +96,7 @@ namespace BudgetManager
         private double GetBudgetValue(Category category)
         {
             double actualVal = 0.0;
-            foreach (Transaction item in category.Transactions)
+            foreach ( item in category.CatTrans)
             {
                 actualVal += item.Value;
             }
