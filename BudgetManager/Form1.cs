@@ -15,10 +15,17 @@ namespace BudgetManager
     public partial class Form1 : Form
     {
         private List<Category> categoriesList;
+        private int userId = -1;
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public Form1(int userId)
+        {
+            InitializeComponent();
+            this.userId = userId;
         }
 
         private void btnTranactinMgtClick(object sender, EventArgs e)
@@ -71,7 +78,9 @@ namespace BudgetManager
                         where Category.UserId == 1 // to do : user should be passed
                         select Category;
 
-            categoriesList = categoriesList = query.ToList();
+            if (query.Any()) {
+                categoriesList = categoriesList = query.ToList();
+            }
             loadExpenseBars();
         }
 
