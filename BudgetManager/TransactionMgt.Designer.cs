@@ -64,7 +64,7 @@
             // 
             this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
             this.btnHome.Location = new System.Drawing.Point(1331, 20);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(4);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(71, 66);
             this.btnHome.TabIndex = 0;
@@ -74,10 +74,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(495, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(466, 54);
+            this.label1.Size = new System.Drawing.Size(485, 54);
             this.label1.TabIndex = 1;
             this.label1.Text = "Transaction Manager";
             // 
@@ -357,7 +357,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnHome);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TransactionMgt";
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
