@@ -63,10 +63,10 @@ namespace BudgetManager
             }
 
             User user = new User();
-            user.Name = txtName.Text;
+            user.Name = txtUsername.Text;
                         
             var query = from User in budgetManager.Users
-            where User.UserName == user.Name
+            where User.UserName == user.UserName
             select User;
 
             User userFromDB;

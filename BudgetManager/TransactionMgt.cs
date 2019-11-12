@@ -35,6 +35,13 @@ namespace BudgetManager
             loadData();
         }
 
+        public TransactionMgt(int userId)
+        {
+            this.userId = userId;
+            InitializeComponent();
+            loadData();
+        }
+
         private void loadData()
         {
             userId = 1;
