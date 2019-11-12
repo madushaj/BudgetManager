@@ -15,6 +15,7 @@ namespace BudgetManager
     public partial class Form1 : Form
     {
         private List<Category> categoriesList;
+        private List<BudgetItem> ThisMonthItemList;
         private int userId = -1;
 
         public Form1()
@@ -79,48 +80,81 @@ namespace BudgetManager
                         select Category;
 
             if (query.Any()) {
-                categoriesList = categoriesList = query.ToList();
+                categoriesList = query.ToList();
+                loadExpenseBars();
             }
-            //loadExpenseBars();
+            
         }
 
-        //private void loadExpenseBars()
-        //{
-        //    foreach (Category item in categoriesList)
-        //    {
-        //        double budgetVal = GetBudgetValue(item);
-        //        double actualVal = GetActualValue(item);
+        private void loadExpenseBars()
+        {
+            int i = 0;
+            foreach (Category item in categoriesList)
+            {
+                double budgetVal = GetBudgetValue(item);
+                double actualVal = GetActualValue(item);
+                
+                ExpenseVisualControl expensecontrol = new ExpenseVisualControl();
+                expensecontrol.Location = new System.Drawing.Point(20, 21 + 85*i);
+                expensecontrol.Name = item.Name + "ExpenseVisualControl";
+                expensecontrol.categoryLabel.Text = item.Name.ToUpper();
+                expensecontrol.valueLabel.Text = String.Format("Rs. {0:0.00} of {1:0.00}", actualVal, budgetVal);
+                expensecontrol.newProgressBar1.Value = (budgetVal == 0) ? 0 : (actualVal < budgetVal) ? Convert.ToInt32((actualVal / budgetVal) * 100) : 100;
+                i++;
+                this.expenseGroup.Controls.Add(expensecontrol);
 
-        //        ExpenseVisualControl expensecontrol = new ExpenseVisualControl();
-        //        expensecontrol.Location = new System.Drawing.Point(12, 150);
-        //        expensecontrol.Name = item.Name + "ExpenseVisualControl";
-        //        expensecontrol.categoryLabel.Text = item.Name;
-        //        expensecontrol.valueLabel.Text = String.Format("Rs. {0:0.00} of {1:0.00}", actualVal, budgetVal);
-        //        expensecontrol.newProgressBar1.Value = (actualVal < budgetVal) ? Convert.ToInt32((actualVal / budgetVal) * 100) : 100;
-        //        this.Controls.Add(expensecontrol);
+            }
+        }
 
-        //    }
-        //}
+        private double GetBudgetValue(Category category)
+        {
+            getBudgetItems();
+            if (ThisMonthItemList != null)
+            {
+                BudgetItem bitem = ThisMonthItemList.Find(f => f.CategoryId == category.Id);
+                if (bitem != null) return bitem.Allocation;
+            }
+            return 0.0;
+        }
 
-        //private double GetBudgetValue(Category category)
-        //{
-        //    double actualVal = 0.0;
-        //    foreach (CatTrans item in category.CatTrans)
-        //    {
-        //        //actualVal += item.Value;
-        //    }
-        //    return actualVal;
-        //}
+        private void getBudgetItems()
+        {
+            BudgetManagerModelContainer budgetManager = new BudgetManagerModelContainer();
+            var query = from Budget in budgetManager.Budgets
+                        where Budget.UserId == 1 && Budget.Month == DateTime.Now.Month// to do : user should be passed
+                        select Budget;
+            if (query.Any())
+            {
+                ThisMonthItemList = query.First().BudgetItems.ToList();
+            }
+        }
 
-        //private double GetActualValue(Category category)
-        //{
-        //    double actualVal = 0.0;
-        //    foreach (CatTrans item in category.CatTrans) 
-        //    {
-        //      //  actualVal += item.Value;
-        //    }
-        //    return actualVal;
-        //}
+        private double GetActualValue(Category category)
+        {
+            double actualVal = 0.0;
+            double income = 0.0;
+            double expense = 0.0;
+            if (category.CatTrans.ToList() == null)
+            {
+                return actualVal;
+            }
+            CatTrans catTrans =  category.CatTrans.ToList().Find(f => f.Month == DateTime.Now.Month && f.Year == DateTime.Now.Year);
+            if (catTrans != null)
+            {
+                foreach (Transaction item in catTrans.Transactions.ToList())
+                {
+                    if (item.TrType == TransactionType.Income) {
+                        income += item.Value;
+                    }
+                    else {
+                        expense += item.Value;
+                    }
+                }
+                actualVal = expense - income ;
+            }
+            return actualVal;
+        }
+
     }
 
 

@@ -17,7 +17,13 @@ namespace BudgetManager
         private List<Category> categoryList;
         private int selectedTransactionId = -1;
         BudgetManagerModelContainer budgetManager;
-       
+
+        enum transactionOperations
+        {
+            Save = 0,
+            Modify = 1
+        }
+
         private void setselectedTransactionId(int id)
         {
             this.selectedTransactionId = id;
@@ -87,6 +93,11 @@ namespace BudgetManager
             for (int i = 0; i <= dataGridViewTransaction.Columns.Count - 1; i++)
             {
                 dataGridViewTransaction.Columns[i].Width = tempColWidth;
+
+                /*if ((i == 4) && dataGridViewTransaction.Columns[i].ValueType.ToString()) 
+                {
+
+                }*/
             }
             this.dataGridViewTransaction.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
@@ -114,10 +125,9 @@ namespace BudgetManager
             return true;
         }
 
-        private bool createTransactionFromValues(ref Transaction transaction)
+        private bool createTransactionFromValues(ref Transaction transaction, transactionOperations op)
         {
             Double tempVal = 0;
-            CatTrans categoryTransaction;
 
             if (!ValidateField(txtTitle.Text, "Title"))
             {
@@ -141,7 +151,6 @@ namespace BudgetManager
                 return false;
             }
 
-            categoryTransaction = new CatTrans();
             transaction.Title = txtTitle.Text;
             
             transaction.Desc = txtDescription.Text;
@@ -159,10 +168,24 @@ namespace BudgetManager
             transaction.Date = datePickerTransaction.Value.Date;
             transaction.UserId = this.userId;
 
-            categoryTransaction.CategoryId = ((Category)comboCategory.SelectedItem).Id;
-            categoryTransaction.Month = (Int16)(datePickerTransaction.Value.Month);
-            categoryTransaction.Year = (Int16)(datePickerTransaction.Value.Year);
-            transaction.CatTran = categoryTransaction;
+            var query = from CatTran in budgetManager.CatTrans
+                        where CatTran.Month == (Int16)(datePickerTransaction.Value.Month) &&
+                        CatTran.Year == (Int16)(datePickerTransaction.Value.Year) &&
+                        CatTran.CategoryId == ((Category)comboCategory.SelectedItem).Id
+                        select CatTran;
+
+            if (query.Any())
+            {
+                transaction.CatTran = query.First();
+            }
+            else
+            {
+                CatTrans catTran = new CatTrans();
+                catTran.CategoryId = ((Category)comboCategory.SelectedItem).Id;
+                catTran.Month = (Int16)(datePickerTransaction.Value.Month);
+                catTran.Year = (Int16)(datePickerTransaction.Value.Year);
+                transaction.CatTran = catTran;
+            }
 
             return true;
         }
@@ -170,7 +193,7 @@ namespace BudgetManager
         private void addTransaction(object sender, EventArgs e)
         {
             Transaction transaction = new Transaction();
-            if (createTransactionFromValues(ref transaction))
+            if (createTransactionFromValues(ref transaction, transactionOperations.Save))
             {
                 budgetManager.Transactions.Add(transaction);
                 budgetManager.SaveChanges();
@@ -214,7 +237,7 @@ namespace BudgetManager
                             select Transaction;
 
                 Transaction transaction = query.First();
-                createTransactionFromValues(ref transaction);
+                createTransactionFromValues(ref transaction, transactionOperations.Modify);
                 budgetManager.SaveChanges();
                 setselectedTransactionId(-1);
                 MessageBox.Show("Transaction modified successfully", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -229,6 +252,7 @@ namespace BudgetManager
         private void deleteTransaction(object sender, EventArgs e)
         {
             int tmpSelectedIndex = getselectedTransactionId();
+            int catTransId;
             if (tmpSelectedIndex > 0)
             {
                 var query = from Transaction in budgetManager.Transactions
@@ -236,7 +260,17 @@ namespace BudgetManager
                             select Transaction;
 
                 Transaction transaction = query.First();
+                catTransId = transaction.CatTransId;
                 budgetManager.Transactions.Remove(transaction);
+
+                var query2 = from CatTrans in budgetManager.CatTrans
+                            where CatTrans.Id == catTransId
+                            select CatTrans;
+
+                if (query2.Any()) {
+                    CatTrans catTrans = query2.First();
+                    budgetManager.CatTrans.Remove(catTrans);
+                }
                 budgetManager.SaveChanges();
                 setselectedTransactionId(-1);
                 MessageBox.Show("Transaction deleted successfully", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
