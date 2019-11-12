@@ -17,8 +17,8 @@ namespace BudgetManager
             InitializeComponent();
             //hide month textbox
             txtMonth.Visible = false;
-            btnDeleteBudgetItem.BackColor = Color.Red;
 
+            
             //set values to category combo Box
             BudgetManagerModelContainer db = new BudgetManagerModelContainer();
             var query = from Category in db.Categories
@@ -291,6 +291,11 @@ namespace BudgetManager
 
             setDataGridValue(year, month);
             cleanFields();
+        }
+
+        private void Label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
