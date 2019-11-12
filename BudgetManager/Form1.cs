@@ -109,8 +109,11 @@ namespace BudgetManager
         private double GetBudgetValue(Category category)
         {
             getBudgetItems();
-            BudgetItem bitem = ThisMonthItemList.Find(f => f.CategoryId == category.Id);
-            if (bitem != null) return bitem.Allocation;
+            if (ThisMonthItemList != null)
+            {
+                BudgetItem bitem = ThisMonthItemList.Find(f => f.CategoryId == category.Id);
+                if (bitem != null) return bitem.Allocation;
+            }
             return 0.0;
         }
 
@@ -131,6 +134,10 @@ namespace BudgetManager
             double actualVal = 0.0;
             double income = 0.0;
             double expense = 0.0;
+            if (category.CatTrans.ToList() == null)
+            {
+                return actualVal;
+            }
             CatTrans catTrans =  category.CatTrans.ToList().Find(f => f.Month == DateTime.Now.Month && f.Year == DateTime.Now.Year);
             if (catTrans != null)
             {
