@@ -39,10 +39,15 @@ namespace BudgetManager
             else {
                 MessageBox.Show("Category Already Exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            txtCategoryName.Text = "";
+            txtCategoryDesc.Text = "";
         }
 
-        private void Cancel(object sender, MouseEventArgs e)
+
+        private void Cancel(object sender, EventArgs e)
         {
+            txtCategoryName.Text = "";
+            txtCategoryDesc.Text = "";
             this.categoryAdded(false);
         }
     }
