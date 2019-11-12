@@ -11,7 +11,6 @@
     <EntitySet Name="Categories" EntityType="BudgetManagerModel.Store.Categories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="BudgetItems" EntityType="BudgetManagerModel.Store.BudgetItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Budgets" EntityType="BudgetManagerModel.Store.Budgets" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CatTrans" EntityType="BudgetManagerModel.Store.CatTrans" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UserTransaction" Association="BudgetManagerModel.Store.UserTransaction">
       <End Role="User" EntitySet="Users" />
       <End Role="Transaction" EntitySet="Transactions" />
@@ -24,20 +23,16 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Category" EntitySet="Categories" />
     </AssociationSet>
+    <AssociationSet Name="TransactionCategory" Association="BudgetManagerModel.Store.TransactionCategory">
+      <End Role="Transaction" EntitySet="Transactions" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
     <AssociationSet Name="BudgetItemBudget" Association="BudgetManagerModel.Store.BudgetItemBudget">
       <End Role="BudgetItem" EntitySet="BudgetItems" />
       <End Role="Budget" EntitySet="Budgets" />
     </AssociationSet>
     <AssociationSet Name="BudgetItemCategory" Association="BudgetManagerModel.Store.BudgetItemCategory">
       <End Role="BudgetItem" EntitySet="BudgetItems" />
-      <End Role="Category" EntitySet="Categories" />
-    </AssociationSet>
-    <AssociationSet Name="CatTransTransaction" Association="BudgetManagerModel.Store.CatTransTransaction">
-      <End Role="CatTrans" EntitySet="CatTrans" />
-      <End Role="Transaction" EntitySet="Transactions" />
-    </AssociationSet>
-    <AssociationSet Name="CatTransCategory" Association="BudgetManagerModel.Store.CatTransCategory">
-      <End Role="CatTrans" EntitySet="CatTrans" />
       <End Role="Category" EntitySet="Categories" />
     </AssociationSet>
   </EntityContainer>
@@ -60,9 +55,9 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Desc" Type="nvarchar(max)" Nullable="true" />
     <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
     <Property Name="TrType" Type="int" Nullable="true" />
     <Property Name="RecursionType" Type="int" Nullable="false" />
-    <Property Name="CatTransId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -91,15 +86,6 @@
     <Property Name="Month" Type="smallint" Nullable="false" />
     <Property Name="Year" Type="smallint" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CatTrans">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Month" Type="smallint" Nullable="false" />
-    <Property Name="Year" Type="smallint" Nullable="false" />
-    <Property Name="CategoryId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserTransaction">
     <End Role="User" Type="BudgetManagerModel.Store.Users" Multiplicity="1" />
@@ -137,6 +123,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="TransactionCategory">
+    <End Role="Transaction" Type="BudgetManagerModel.Store.Transactions" Multiplicity="*" />
+    <End Role="Category" Type="BudgetManagerModel.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="BudgetItemBudget">
     <End Role="BudgetItem" Type="BudgetManagerModel.Store.BudgetItems" Multiplicity="*" />
     <End Role="Budget" Type="BudgetManagerModel.Store.Budgets" Multiplicity="1" />
@@ -157,30 +155,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="BudgetItem">
-        <PropertyRef Name="CategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CatTransTransaction">
-    <End Role="CatTrans" Type="BudgetManagerModel.Store.CatTrans" Multiplicity="1" />
-    <End Role="Transaction" Type="BudgetManagerModel.Store.Transactions" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CatTrans">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Transaction">
-        <PropertyRef Name="CatTransId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CatTransCategory">
-    <End Role="CatTrans" Type="BudgetManagerModel.Store.CatTrans" Multiplicity="*" />
-    <End Role="Category" Type="BudgetManagerModel.Store.Categories" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CatTrans">
         <PropertyRef Name="CategoryId" />
       </Dependent>
     </ReferentialConstraint>
@@ -207,21 +181,16 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Category" EntitySet="Categories" />
           </AssociationSet>
+          <AssociationSet Name="TransactionCategory" Association="BudgetManagerModel.TransactionCategory">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
           <AssociationSet Name="BudgetItemBudget" Association="BudgetManagerModel.BudgetItemBudget">
             <End Role="BudgetItem" EntitySet="BudgetItems" />
             <End Role="Budget" EntitySet="Budgets" />
           </AssociationSet>
           <AssociationSet Name="BudgetItemCategory" Association="BudgetManagerModel.BudgetItemCategory">
             <End Role="BudgetItem" EntitySet="BudgetItems" />
-            <End Role="Category" EntitySet="Categories" />
-          </AssociationSet>
-          <EntitySet Name="CatTrans" EntityType="BudgetManagerModel.CatTrans" />
-          <AssociationSet Name="CatTransTransaction" Association="BudgetManagerModel.CatTransTransaction">
-            <End Role="CatTrans" EntitySet="CatTrans" />
-            <End Role="Transaction" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="CatTransCategory" Association="BudgetManagerModel.CatTransCategory">
-            <End Role="CatTrans" EntitySet="CatTrans" />
             <End Role="Category" EntitySet="Categories" />
           </AssociationSet>
         </EntityContainer>
@@ -248,10 +217,10 @@
           <Property Name="Desc" Type="String" Nullable="true" />
           <NavigationProperty Name="User" Relationship="BudgetManagerModel.UserTransaction" FromRole="Transaction" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="BudgetManagerModel.TransactionCategory" FromRole="Transaction" ToRole="Category" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="TrType" Type="BudgetManagerModel.TransactionType" Nullable="true" />
           <Property Name="RecursionType" Type="BudgetManagerModel.RecursionInterval" Nullable="false" />
-          <NavigationProperty Name="CatTran" Relationship="BudgetManagerModel.CatTransTransaction" FromRole="Transaction" ToRole="CatTrans" />
-          <Property Name="CatTransId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -262,8 +231,8 @@
           <Property Name="Desc" Type="String" Nullable="false" />
           <NavigationProperty Name="User" Relationship="BudgetManagerModel.UserCategory" FromRole="Category" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="BudgetManagerModel.TransactionCategory" FromRole="Category" ToRole="Transaction" />
           <NavigationProperty Name="BudgetItems" Relationship="BudgetManagerModel.BudgetItemCategory" FromRole="Category" ToRole="BudgetItem" />
-          <NavigationProperty Name="CatTrans" Relationship="BudgetManagerModel.CatTransCategory" FromRole="Category" ToRole="CatTrans" />
         </EntityType>
         <EntityType Name="BudgetItem">
           <Key>
@@ -334,6 +303,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TransactionCategory">
+          <End Type="BudgetManagerModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <End Type="BudgetManagerModel.Category" Role="Category" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="BudgetItemBudget">
           <End Type="BudgetManagerModel.BudgetItem" Role="BudgetItem" Multiplicity="*" />
           <End Type="BudgetManagerModel.Budget" Role="Budget" Multiplicity="1" />
@@ -354,41 +335,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="BudgetItem">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CatTrans">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Month" Type="Int16" Nullable="false" />
-          <Property Name="Year" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Transactions" Relationship="BudgetManagerModel.CatTransTransaction" FromRole="CatTrans" ToRole="Transaction" />
-          <NavigationProperty Name="Category" Relationship="BudgetManagerModel.CatTransCategory" FromRole="CatTrans" ToRole="Category" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="CatTransTransaction">
-          <End Type="BudgetManagerModel.CatTrans" Role="CatTrans" Multiplicity="1" />
-          <End Type="BudgetManagerModel.Transaction" Role="Transaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatTrans">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transaction">
-              <PropertyRef Name="CatTransId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CatTransCategory">
-          <End Type="BudgetManagerModel.CatTrans" Role="CatTrans" Multiplicity="*" />
-          <End Type="BudgetManagerModel.Category" Role="Category" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CatTrans">
               <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
@@ -418,9 +364,9 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Desc" ColumnName="Desc" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="TrType" ColumnName="TrType" />
           <ScalarProperty Name="RecursionType" ColumnName="RecursionType" />
-          <ScalarProperty Name="CatTransId" ColumnName="CatTransId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -452,16 +398,6 @@
           <ScalarProperty Name="Month" ColumnName="Month" />
           <ScalarProperty Name="Year" ColumnName="Year" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CatTrans">
-      <EntityTypeMapping TypeName="IsTypeOf(BudgetManagerModel.CatTrans)">
-        <MappingFragment StoreEntitySet="CatTrans">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Month" ColumnName="Month" />
-          <ScalarProperty Name="Year" ColumnName="Year" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

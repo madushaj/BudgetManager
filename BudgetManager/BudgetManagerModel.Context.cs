@@ -30,6 +30,5 @@ namespace BudgetManager
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<BudgetItem> BudgetItems { get; set; }
         public virtual DbSet<Budget> Budgets { get; set; }
-        public virtual DbSet<CatTrans> CatTrans { get; set; }
     }
 }

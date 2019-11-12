@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/12/2019 10:59:31
+-- Date Created: 11/11/2019 12:11:46
 -- Generated from EDMX file: C:\Users\mjaylk\source\repos\BudgetManager\BudgetManager\BudgetManagerModel.edmx
 -- --------------------------------------------------
 
@@ -17,44 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_UserTransaction]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_UserTransaction];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserBudget]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Budgets] DROP CONSTRAINT [FK_UserBudget];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Categories] DROP CONSTRAINT [FK_UserCategory];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TransactionCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_TransactionCategory];
-GO
-IF OBJECT_ID(N'[dbo].[FK_BudgetItemBudget]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BudgetItems] DROP CONSTRAINT [FK_BudgetItemBudget];
-GO
-IF OBJECT_ID(N'[dbo].[FK_BudgetItemCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BudgetItems] DROP CONSTRAINT [FK_BudgetItemCategory];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Users];
-GO
-IF OBJECT_ID(N'[dbo].[Transactions]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Transactions];
-GO
-IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Categories];
-GO
-IF OBJECT_ID(N'[dbo].[BudgetItems]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[BudgetItems];
-GO
-IF OBJECT_ID(N'[dbo].[Budgets]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Budgets];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -77,9 +44,9 @@ CREATE TABLE [dbo].[Transactions] (
     [Date] datetime  NOT NULL,
     [Desc] nvarchar(max)  NULL,
     [UserId] int  NOT NULL,
+    [CategoryId] int  NOT NULL,
     [TrType] int  NULL,
-    [RecursionType] int  NOT NULL,
-    [CatTransId] int  NOT NULL
+    [RecursionType] int  NOT NULL
 );
 GO
 
@@ -108,15 +75,6 @@ CREATE TABLE [dbo].[Budgets] (
     [Month] smallint  NOT NULL,
     [Year] smallint  NOT NULL,
     [UserId] int  NOT NULL
-);
-GO
-
--- Creating table 'CatTrans'
-CREATE TABLE [dbo].[CatTrans] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Month] smallint  NOT NULL,
-    [Year] smallint  NOT NULL,
-    [CategoryId] int  NOT NULL
 );
 GO
 
@@ -151,12 +109,6 @@ GO
 -- Creating primary key on [Id] in table 'Budgets'
 ALTER TABLE [dbo].[Budgets]
 ADD CONSTRAINT [PK_Budgets]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'CatTrans'
-ALTER TABLE [dbo].[CatTrans]
-ADD CONSTRAINT [PK_CatTrans]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -209,6 +161,21 @@ ON [dbo].[Categories]
     ([UserId]);
 GO
 
+-- Creating foreign key on [CategoryId] in table 'Transactions'
+ALTER TABLE [dbo].[Transactions]
+ADD CONSTRAINT [FK_TransactionCategory]
+    FOREIGN KEY ([CategoryId])
+    REFERENCES [dbo].[Categories]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TransactionCategory'
+CREATE INDEX [IX_FK_TransactionCategory]
+ON [dbo].[Transactions]
+    ([CategoryId]);
+GO
+
 -- Creating foreign key on [BudgetId] in table 'BudgetItems'
 ALTER TABLE [dbo].[BudgetItems]
 ADD CONSTRAINT [FK_BudgetItemBudget]
@@ -236,36 +203,6 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_BudgetItemCategory'
 CREATE INDEX [IX_FK_BudgetItemCategory]
 ON [dbo].[BudgetItems]
-    ([CategoryId]);
-GO
-
--- Creating foreign key on [CatTransId] in table 'Transactions'
-ALTER TABLE [dbo].[Transactions]
-ADD CONSTRAINT [FK_CatTransTransaction]
-    FOREIGN KEY ([CatTransId])
-    REFERENCES [dbo].[CatTrans]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CatTransTransaction'
-CREATE INDEX [IX_FK_CatTransTransaction]
-ON [dbo].[Transactions]
-    ([CatTransId]);
-GO
-
--- Creating foreign key on [CategoryId] in table 'CatTrans'
-ALTER TABLE [dbo].[CatTrans]
-ADD CONSTRAINT [FK_CatTransCategory]
-    FOREIGN KEY ([CategoryId])
-    REFERENCES [dbo].[Categories]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CatTransCategory'
-CREATE INDEX [IX_FK_CatTransCategory]
-ON [dbo].[CatTrans]
     ([CategoryId]);
 GO
 

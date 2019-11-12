@@ -20,11 +20,11 @@ namespace BudgetManager
         public System.DateTime Date { get; set; }
         public string Desc { get; set; }
         public int UserId { get; set; }
+        public int CategoryId { get; set; }
         public Nullable<TransactionType> TrType { get; set; }
         public RecursionInterval RecursionType { get; set; }
-        public int CatTransId { get; set; }
     
         public virtual User User { get; set; }
-        public virtual CatTrans CatTran { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

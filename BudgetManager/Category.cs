@@ -17,8 +17,8 @@ namespace BudgetManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
+            this.Transactions = new HashSet<Transaction>();
             this.BudgetItems = new HashSet<BudgetItem>();
-            this.CatTrans = new HashSet<CatTrans>();
         }
     
         public int Id { get; set; }
@@ -28,8 +28,8 @@ namespace BudgetManager
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BudgetItem> BudgetItems { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CatTrans> CatTrans { get; set; }
+        public virtual ICollection<BudgetItem> BudgetItems { get; set; }
     }
 }
