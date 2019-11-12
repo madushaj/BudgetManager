@@ -15,10 +15,17 @@ namespace BudgetManager
     public partial class Form1 : Form
     {
         private List<Category> categoriesList;
+        private int userId = -1;
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public Form1(int userId)
+        {
+            InitializeComponent();
+            this.userId = userId;
         }
 
         private void btnTranactinMgtClick(object sender, EventArgs e)

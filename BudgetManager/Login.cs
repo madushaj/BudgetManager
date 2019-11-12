@@ -12,9 +12,13 @@ namespace BudgetManager
 {
     public partial class Login : Form
     {
+
+        BudgetManagerModelContainer budgetManager;
+
         public Login()
         {
             InitializeComponent();
+            budgetManager = new BudgetManagerModelContainer();
             clearFields();
         }
 
@@ -29,6 +33,34 @@ namespace BudgetManager
             {
                 MessageBox.Show("'Password' field cannot be empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+
+            User user = new User();
+            user.UserName = txtUsername.Text;
+
+            var query = from User in budgetManager.Users
+                        where User.UserName == user.UserName
+                        select User;
+
+            User userFromDB;
+            if (query.Any())
+            {
+                userFromDB = query.First();
+                if (txtPassword.Text != userFromDB.Password)
+                {
+                    MessageBox.Show("Incorrect password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    this.Hide();
+                    Form1 mainWindow = new Form1();
+                    mainWindow.ShowDialog();
+                }
+            }
+            else
+            {
+                MessageBox.Show("User does not exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
