@@ -25,7 +25,7 @@ namespace BudgetManager
         private void btnHomeClick(object sender, EventArgs e)
         {
             this.Hide();
-            Form1 form1 = new Form1();
+            ExpenseVisualizer form1 = new ExpenseVisualizer();
             form1.ShowDialog();
         }
 

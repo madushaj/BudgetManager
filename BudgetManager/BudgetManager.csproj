@@ -112,11 +112,11 @@
     <Compile Include="ExpenseVisualControl.Designer.cs">
       <DependentUpon>ExpenseVisualControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="ExpenseVisualizer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ExpenseVisualizer.Designer.cs">
+      <DependentUpon>ExpenseVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -161,8 +161,8 @@
     <EmbeddedResource Include="ExpenseVisualControl.resx">
       <DependentUpon>ExpenseVisualControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="ExpenseVisualizer.resx">
+      <DependentUpon>ExpenseVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CategoryCustomControl.resx">
       <DependentUpon>CategoryCustomControl.cs</DependentUpon>

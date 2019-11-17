@@ -12,18 +12,18 @@ using System.Windows.Forms;
 
 namespace BudgetManager
 {
-    public partial class Form1 : Form
+    public partial class ExpenseVisualizer : Form
     {
         private List<Category> categoriesList;
         private List<BudgetItem> ThisMonthItemList;
         private int userId = -1;
 
-        public Form1()
+        public ExpenseVisualizer()
         {
             InitializeComponent();
         }
 
-        public Form1(int userId)
+        public ExpenseVisualizer(int userId)
         {
             InitializeComponent();
             this.userId = userId;

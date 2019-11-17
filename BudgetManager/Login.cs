@@ -54,7 +54,7 @@ namespace BudgetManager
                 else
                 {
                     this.Hide();
-                    Form1 mainWindow = new Form1();
+                    ExpenseVisualizer mainWindow = new ExpenseVisualizer();
                     mainWindow.ShowDialog();
                 }
             }
