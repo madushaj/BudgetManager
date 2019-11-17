@@ -56,16 +56,6 @@ namespace BudgetManager
         /// 
         /// 
 
-
-        private void click(object sender, MouseEventArgs e)
-        {
-            for (int i = 1; i <= 100; i++)
-            {
-                //newProgressBar1.Value = i;
-                Thread.Sleep(100);
-            }
-        }
-
         private void loadForm(object sender, EventArgs e)
         {
             loadCategoryList();

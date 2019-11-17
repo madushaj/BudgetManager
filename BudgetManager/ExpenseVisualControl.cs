@@ -17,10 +17,5 @@ namespace BudgetManager
         {
             InitializeComponent();
         }
-
-        private void loadControl(object sender, EventArgs e)
-        {
-
-        }
     }
 }
