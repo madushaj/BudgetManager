@@ -88,22 +88,34 @@ namespace BudgetManager
 
         private void loadExpenseBars()
         {
-            int i = 0;
+            double totalbudgetval = 0;
+            double totalactual = 0;
+            int i = 1;
             foreach (Category item in categoriesList)
             {
                 double budgetVal = GetBudgetValue(item);
                 double actualVal = GetActualValue(item);
-                
+                totalbudgetval += budgetVal;
+                totalactual += actualVal;
                 ExpenseVisualControl expensecontrol = new ExpenseVisualControl();
                 expensecontrol.Location = new System.Drawing.Point(20, 21 + 85*i);
                 expensecontrol.Name = item.Name + "ExpenseVisualControl";
                 expensecontrol.categoryLabel.Text = item.Name.ToUpper();
                 expensecontrol.valueLabel.Text = String.Format("Rs. {0:0.00} of {1:0.00}", actualVal, budgetVal);
-                expensecontrol.newProgressBar1.Value = (budgetVal == 0) ? 0 : (actualVal < budgetVal) ? Convert.ToInt32((actualVal / budgetVal) * 100) : 100;
+                expensecontrol.newProgressBar1.Value = (budgetVal == 0 || (actualVal < 0)) ? 0 : (actualVal < budgetVal) ? Convert.ToInt32((actualVal / budgetVal) * 100) : 100;
                 i++;
                 this.expenseGroup.Controls.Add(expensecontrol);
 
             }
+
+            ExpenseVisualControl totalexpensecontrol = new ExpenseVisualControl();
+            totalexpensecontrol.Location = new System.Drawing.Point(20, 21);
+            totalexpensecontrol.Name = "TotalExpenseVisualControl";
+            totalexpensecontrol.categoryLabel.Text = "Total Spending";
+            totalexpensecontrol.valueLabel.Text = String.Format("Rs. {0:0.00} of {1:0.00}", totalactual, totalbudgetval);
+            totalexpensecontrol.newProgressBar1.Value = (totalbudgetval == 0 || (totalactual < 0)) ) ? 0 : (totalactual < totalbudgetval) ? Convert.ToInt32((totalactual / totalbudgetval) * 100) : 100;
+            i++;
+            this.expenseGroup.Controls.Add(totalexpensecontrol);
         }
 
         private double GetBudgetValue(Category category)

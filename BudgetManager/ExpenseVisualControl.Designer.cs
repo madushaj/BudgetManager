@@ -68,7 +68,7 @@
             this.Controls.Add(this.categoryLabel);
             this.Controls.Add(this.newProgressBar1);
             this.Name = "ExpenseVisualControl";
-            this.Size = new System.Drawing.Size(607, 99);
+            this.Size = new System.Drawing.Size(637, 99);
             this.Load += new System.EventHandler(this.loadControl);
             this.ResumeLayout(false);
             this.PerformLayout();
