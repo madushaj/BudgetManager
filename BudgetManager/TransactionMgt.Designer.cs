@@ -77,7 +77,7 @@
             this.label1.Location = new System.Drawing.Point(360, 12);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(357, 39);
+            this.label1.Size = new System.Drawing.Size(344, 38);
             this.label1.TabIndex = 1;
             this.label1.Text = "Transaction Manager";
             // 
@@ -104,7 +104,7 @@
             // txtTitle
             // 
             this.txtTitle.Location = new System.Drawing.Point(145, 77);
-            this.txtTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTitle.Margin = new System.Windows.Forms.Padding(2);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(352, 22);
             this.txtTitle.TabIndex = 4;
@@ -112,7 +112,7 @@
             // txtValue
             // 
             this.txtValue.Location = new System.Drawing.Point(145, 111);
-            this.txtValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValue.Margin = new System.Windows.Forms.Padding(2);
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(352, 22);
             this.txtValue.TabIndex = 5;
@@ -140,7 +140,7 @@
             // datePickerTransaction
             // 
             this.datePickerTransaction.Location = new System.Drawing.Point(145, 148);
-            this.datePickerTransaction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.datePickerTransaction.Margin = new System.Windows.Forms.Padding(2);
             this.datePickerTransaction.Name = "datePickerTransaction";
             this.datePickerTransaction.Size = new System.Drawing.Size(352, 22);
             this.datePickerTransaction.TabIndex = 8;
@@ -148,7 +148,7 @@
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(661, 77);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(360, 55);
@@ -168,7 +168,7 @@
             // 
             this.radioIncome.AutoSize = true;
             this.radioIncome.Location = new System.Drawing.Point(815, 195);
-            this.radioIncome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioIncome.Margin = new System.Windows.Forms.Padding(2);
             this.radioIncome.Name = "radioIncome";
             this.radioIncome.Size = new System.Drawing.Size(74, 21);
             this.radioIncome.TabIndex = 12;
@@ -180,7 +180,7 @@
             // 
             this.radioExpense.AutoSize = true;
             this.radioExpense.Location = new System.Drawing.Point(933, 195);
-            this.radioExpense.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioExpense.Margin = new System.Windows.Forms.Padding(2);
             this.radioExpense.Name = "radioExpense";
             this.radioExpense.Size = new System.Drawing.Size(83, 21);
             this.radioExpense.TabIndex = 13;
@@ -202,7 +202,7 @@
             // 
             this.comboRecursionType.FormattingEnabled = true;
             this.comboRecursionType.Location = new System.Drawing.Point(661, 146);
-            this.comboRecursionType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboRecursionType.Margin = new System.Windows.Forms.Padding(2);
             this.comboRecursionType.Name = "comboRecursionType";
             this.comboRecursionType.Size = new System.Drawing.Size(360, 24);
             this.comboRecursionType.TabIndex = 15;
@@ -215,7 +215,7 @@
             this.dataGridViewTransaction.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridViewTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewTransaction.Location = new System.Drawing.Point(31, 337);
-            this.dataGridViewTransaction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewTransaction.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewTransaction.MultiSelect = false;
             this.dataGridViewTransaction.Name = "dataGridViewTransaction";
             this.dataGridViewTransaction.ReadOnly = true;
@@ -225,11 +225,12 @@
             this.dataGridViewTransaction.Size = new System.Drawing.Size(989, 315);
             this.dataGridViewTransaction.TabIndex = 16;
             this.dataGridViewTransaction.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectTransaction);
+            this.dataGridViewTransaction.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewTransaction_CellFormatting);
             // 
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(937, 677);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(79, 31);
             this.btnDelete.TabIndex = 17;
@@ -240,7 +241,7 @@
             // btnModify
             // 
             this.btnModify.Location = new System.Drawing.Point(832, 677);
-            this.btnModify.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnModify.Margin = new System.Windows.Forms.Padding(2);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(79, 31);
             this.btnModify.TabIndex = 18;
@@ -251,7 +252,7 @@
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(723, 677);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(79, 31);
             this.btnAdd.TabIndex = 19;
@@ -283,7 +284,7 @@
             // datePickerStart
             // 
             this.datePickerStart.Location = new System.Drawing.Point(145, 298);
-            this.datePickerStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.datePickerStart.Margin = new System.Windows.Forms.Padding(2);
             this.datePickerStart.Name = "datePickerStart";
             this.datePickerStart.Size = new System.Drawing.Size(352, 22);
             this.datePickerStart.TabIndex = 22;
@@ -291,7 +292,7 @@
             // datePickerEnd
             // 
             this.datePickerEnd.Location = new System.Drawing.Point(661, 296);
-            this.datePickerEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.datePickerEnd.Margin = new System.Windows.Forms.Padding(2);
             this.datePickerEnd.Name = "datePickerEnd";
             this.datePickerEnd.Size = new System.Drawing.Size(360, 22);
             this.datePickerEnd.TabIndex = 24;
@@ -309,7 +310,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(31, 677);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(79, 31);
             this.button1.TabIndex = 25;
@@ -331,7 +332,7 @@
             // 
             this.comboCategory.FormattingEnabled = true;
             this.comboCategory.Location = new System.Drawing.Point(145, 192);
-            this.comboCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboCategory.Margin = new System.Windows.Forms.Padding(2);
             this.comboCategory.Name = "comboCategory";
             this.comboCategory.Size = new System.Drawing.Size(352, 24);
             this.comboCategory.TabIndex = 27;
@@ -339,7 +340,7 @@
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(132, 677);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(79, 31);
             this.btnClear.TabIndex = 28;
