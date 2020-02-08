@@ -17,6 +17,7 @@ namespace BudgetManager
         private List<Category> categoryList;
         private int selectedTransactionId = -1;
         BudgetManagerModelContainer budgetManager;
+        private static bool isGridColorUpdated = false;
 
         enum transactionOperations
         {
@@ -37,7 +38,6 @@ namespace BudgetManager
         public TransactionMgt()
         {
             InitializeComponent();
-            
             loadData();
         }
 
@@ -64,11 +64,14 @@ namespace BudgetManager
                         where Category.UserId == 1 // to do : user should be passed
                         select Category;
 
-            categoryList = query2.ToList();
-            comboCategory.DataSource = categoryList;
-            comboCategory.DisplayMember = "Name";
-            comboCategory.ValueMember = "Id";
-            comboCategory.SelectedIndex = 0;
+            
+            if (query2.Any()) {
+                categoryList = query2.ToList();
+                comboCategory.DataSource = categoryList;
+                comboCategory.DisplayMember = "Name";
+                comboCategory.ValueMember = "Id";
+                comboCategory.SelectedIndex = 0;
+            }
 
 
             radioIncome.Checked = true;
@@ -93,13 +96,23 @@ namespace BudgetManager
             for (int i = 0; i <= dataGridViewTransaction.Columns.Count - 1; i++)
             {
                 dataGridViewTransaction.Columns[i].Width = tempColWidth;
-
-                /*if ((i == 4) && dataGridViewTransaction.Columns[i].ValueType.ToString()) 
-                {
-
-                }*/
             }
             this.dataGridViewTransaction.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            foreach (DataGridViewRow Myrow in dataGridViewTransaction.Rows)
+            {            
+                if (Convert.ToInt32(Myrow.Cells[4].Value) == 1) 
+                {
+                    Myrow.DefaultCellStyle.BackColor = Color.Red;
+                }
+                else
+                {
+                    Myrow.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+            }
+
+            dataGridViewTransaction.Update();
+            dataGridViewTransaction.Refresh();
         }
 
         private void btnHomeClick(object sender, EventArgs e)
@@ -308,5 +321,25 @@ namespace BudgetManager
         {
             loadData();
         }
+
+        private void dataGridViewTransaction_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow Myrow in dataGridViewTransaction.Rows)
+            {
+                if (Convert.ToInt32(Myrow.Cells[4].Value) == 1)
+                {
+                    Myrow.DefaultCellStyle.BackColor = Color.LightCoral;
+                }
+                else
+                {
+                    Myrow.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+            }
+
+            /*dataGridViewTransaction.Update();
+            dataGridViewTransaction.Refresh();*/
+        }
+
     }
 }
+

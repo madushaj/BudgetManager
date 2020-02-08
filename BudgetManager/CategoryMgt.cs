@@ -37,7 +37,7 @@ namespace BudgetManager
         private void AddCategory(object sender, EventArgs e)
         {
             CategoryCustomControl usercontrol = new CategoryCustomControl();
-            usercontrol.Location = new System.Drawing.Point(12, 150);
+            usercontrol.Location = new System.Drawing.Point(5, 150);
             usercontrol.Name = "categoryCustomControlAdd";
             usercontrol.userId = 1;
             usercontrol.categoryAdded += new CategoryAdded(refreshCategoryList);
