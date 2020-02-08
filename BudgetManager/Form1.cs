@@ -113,7 +113,7 @@ namespace BudgetManager
             totalexpensecontrol.Name = "TotalExpenseVisualControl";
             totalexpensecontrol.categoryLabel.Text = "Total Spending";
             totalexpensecontrol.valueLabel.Text = String.Format("Rs. {0:0.00} of {1:0.00}", totalactual, totalbudgetval);
-            totalexpensecontrol.newProgressBar1.Value = (totalbudgetval == 0 || (totalactual < 0)) ) ? 0 : (totalactual < totalbudgetval) ? Convert.ToInt32((totalactual / totalbudgetval) * 100) : 100;
+            totalexpensecontrol.newProgressBar1.Value = (totalbudgetval == 0 || (totalactual < 0)) ? 0 : (totalactual < totalbudgetval) ? Convert.ToInt32((totalactual / totalbudgetval) * 100) : 100;
             i++;
             this.expenseGroup.Controls.Add(totalexpensecontrol);
         }

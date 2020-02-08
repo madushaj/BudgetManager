@@ -64,7 +64,7 @@
             this.label2.Font = new System.Drawing.Font("Rockwell", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(365, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(274, 42);
+            this.label2.Size = new System.Drawing.Size(272, 41);
             this.label2.TabIndex = 4;
             this.label2.Text = "Budget Planner";
             // 
@@ -121,7 +121,7 @@
             this.Controls.Add(this.btnManageTransaction);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Budget Manager";
+            this.Text = "Budget Planner";
             this.Load += new System.EventHandler(this.loadForm);
             this.expenseGroup.ResumeLayout(false);
             this.expenseGroup.PerformLayout();
