@@ -17,6 +17,7 @@ namespace BudgetManager
         private List<Category> categoryList;
         private int selectedTransactionId = -1;
         BudgetManagerModelContainer budgetManager;
+        private static bool isGridColorUpdated = false;
 
         enum transactionOperations
         {
@@ -102,7 +103,7 @@ namespace BudgetManager
             {            
                 if (Convert.ToInt32(Myrow.Cells[4].Value) == 1) 
                 {
-                    Myrow.DefaultCellStyle.BackColor = Color.LightCoral;
+                    Myrow.DefaultCellStyle.BackColor = Color.Red;
                 }
                 else
                 {
@@ -320,5 +321,25 @@ namespace BudgetManager
         {
             loadData();
         }
+
+        private void dataGridViewTransaction_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow Myrow in dataGridViewTransaction.Rows)
+            {
+                if (Convert.ToInt32(Myrow.Cells[4].Value) == 1)
+                {
+                    Myrow.DefaultCellStyle.BackColor = Color.LightCoral;
+                }
+                else
+                {
+                    Myrow.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+            }
+
+            /*dataGridViewTransaction.Update();
+            dataGridViewTransaction.Refresh();*/
+        }
+
     }
 }
+
