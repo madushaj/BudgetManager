@@ -133,7 +133,7 @@ namespace BudgetManager
         {
             BudgetManagerModelContainer budgetManager = new BudgetManagerModelContainer();
             var query = from Budget in budgetManager.Budgets
-                        where Budget.UserId == 1 && Budget.Month == DateTime.Now.Month// to do : user should be passed
+                        where Budget.UserId == 1 && Budget.Month == DateTime.Now.Month
                         select Budget;
             if (query.Any())
             {

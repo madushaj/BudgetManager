@@ -21,6 +21,10 @@ namespace BudgetManager
 
         private void Save(object sender, EventArgs e)
         {
+            if (txtCategoryName.Text == "" || txtCategoryDesc.Text == "") {
+                MessageBox.Show("Values Cannot be Empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             BudgetManagerModelContainer budgetManager = new BudgetManagerModelContainer();
 
             var query = from Category in budgetManager.Categories
